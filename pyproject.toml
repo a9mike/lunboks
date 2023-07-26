@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "lunboks"
+version = "0.1.0"
+description = "basic analysis tools"
+authors = ["anissa.mike <anissa.mike@wheniwork.com>"]
+readme = "README.md"
+repository = "gitlab.com/miele3/lunboks"
+
+[tool.yapf]
+based_on_style = "pep8"
+spaces_before_comment = 2
+split_before_logical_operator = true
+
+[tool.poetry.dependencies]
+python = ">=3.9, <4.0"
+cython = "*"
+numpy = "*"
+pandas = "*"
+plotly = "*"
+statsmodels = "^0.13.2"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+coverage = "*"
+flake8 = "*"
+flake8-black = "*"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-runner = "*"
+taskipy = "*"
+yapf = "*"
+
+[tool.taskipy.tasks]
+black = "black ."
+flake = "flake8 ."
+yapf = "yapf ."
+mypy = "mypy . --ignore-missing-imports"
+pytest = "pytest . --cov-report term-missing --cov=."
+lint = "task black && task flake && task mypy"
+check = "task black && task flake && task mypy && task pytest"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
